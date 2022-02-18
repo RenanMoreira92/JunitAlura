@@ -32,7 +32,7 @@ public class BonusServiceTest<valor> {
 
         assertEquals( new BigDecimal(1000.00), bonus);
     }
-    return valor.setScale(2, BigDecimal.ROUND_UP);
+
 }
 
 
