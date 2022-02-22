@@ -1,45 +1,66 @@
 package br.com.alura.tdd.service;
 
-import br.com.alura.tdd.modelo.Desempenho;
-import br.com.alura.tdd.modelo.Funcionario;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import br.com.alura.tdd.modelo.Desempenho;
+import br.com.alura.tdd.modelo.Funcionario;
 
 public class ReajusteServiceTest {
 
     @Test
-    public void reajusteDeveriaSerDeTresPorCentoQuandoDesempenhoForADesejar(){
-
+    void reajusteDeveriaSerDeTresPorcentoQuandoDesempenhoForADesejar() {
         ReajusteService service = new ReajusteService();
-        Funcionario funcionario = new Funcionario("Pedro", LocalDate.now(), new BigDecimal(1000.00));
+        Funcionario fulano =
+                new Funcionario("Fulano",
+                        LocalDate.now(),
+                        new BigDecimal("2000.00"));
 
-        service.concederReajuste (funcionario, Desempenho.A_DESEJAR);
+        service.concederReajuste(fulano,
+                Desempenho.A_DESEJAR);
 
-        assertEquals(new BigDecimal(1030.00), funcionario.getSalario());
+        assertEquals(new BigDecimal("2060.00"),
+                fulano.getSalario());
     }
+
     @Test
-    public void reajusteDeveriaSerDeQuinzePorCentoQuandoDesempenhoForADesejar(){
-
+    void reajusteDeveriaSerDeQuinzePorcentoQuandoDesempenhoForBom() {
         ReajusteService service = new ReajusteService();
-        Funcionario funcionario = new Funcionario("Sidney", LocalDate.now(), new BigDecimal(1000.00));
+        Funcionario fulano =
+                new Funcionario("Fulano",
+                        LocalDate.now(),
+                        new BigDecimal("2000.00"));
 
-        service.concederReajuste (funcionario, Desempenho.BOM);
+        service.concederReajuste(fulano,
+                Desempenho.BOM);
 
-        assertEquals(new BigDecimal(1150.00), funcionario.getSalario());
-    } @Test
-    public void reajusteDeveriaSerDeVintePorCentoQuandoDesempenhoForADesejar(){
-
-        ReajusteService service = new ReajusteService();
-        Funcionario funcionario = new Funcionario("Alexandre", LocalDate.now(), new BigDecimal(1000.00));
-
-        service.concederReajuste (funcionario, Desempenho.OTIMO);
-
-        assertEquals(new BigDecimal(1200.00), funcionario.getSalario());
+        assertEquals(new BigDecimal("2300.00"),
+                fulano.getSalario());
     }
 
-    return valor.setScale(2, BigDecimal.ROUND_UP);
+    @Test
+    void reajusteDeveriaSerDeVintePorcentoQuandoDesempenhoForOtimo() {
+        ReajusteService service = new ReajusteService();
+        Funcionario fulano =
+                new Funcionario("Fulano",
+                        LocalDate.now(),
+                        new BigDecimal("2000.00"));
+
+        service.concederReajuste(fulano,
+                Desempenho.OTIMO);
+
+        assertEquals(new BigDecimal("2400.00"),
+                fulano.getSalario());
+    }
+
+
+
+
+
+
+
 }
