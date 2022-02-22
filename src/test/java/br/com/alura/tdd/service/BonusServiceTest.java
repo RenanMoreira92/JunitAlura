@@ -8,6 +8,7 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class BonusServiceTest<valor> {
@@ -15,8 +16,10 @@ public class BonusServiceTest<valor> {
     @Test
     public void bonusDeveriaSerZeroParaFuncionarioComSalarioMuitoALto(){
         BonusService service = new BonusService();
-        BigDecimal bonus = service.calcularBonus(new Funcionario("Rodrigo", LocalDate.now(), new BigDecimal(25000)));
-        assertEquals( new BigDecimal("0.00"), bonus);
+
+        assertThrows(IllegalArgumentException.class,
+        () -> service.calcularBonus(new Funcionario("Rodrigo", LocalDate.now(), new BigDecimal(25000))));
+
     }
     @Test
     public void bonusDeveriaSerDezPorCentoDoSalario(){
